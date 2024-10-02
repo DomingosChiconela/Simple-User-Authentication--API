@@ -36,10 +36,7 @@ export const AuthMiddleware  =  async(req:Request,res:Response, next:NextFunctio
         const decode  =  verify(token,secret)
 
         const {id,role} =  decode as TokenPayload
-        const user = await db.user.findUnique({ where:{id} });
-        if (!user) {
-          return res.status(401).json({ message: "Access denied.User not found" });
-        }
+      
 
 
         req.userId =  id;
@@ -49,7 +46,7 @@ export const AuthMiddleware  =  async(req:Request,res:Response, next:NextFunctio
 
     }catch(error){
 
-        return res.status(401).json({message:"Token not provider"})
+        return res.status(500).json({message:"Internal Server Error"})
     }
 
 

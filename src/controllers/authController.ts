@@ -33,6 +33,7 @@ const loginSchema = signupSchema.pick({
 
 
 export const signup = async (req: Request, res: Response) => {
+    console.log(req.body)
 
     try {
         
@@ -119,4 +120,19 @@ export const login =  async (req: Request, res: Response) => {
    
 
 }
+
+export const logout = (req: Request, res: Response) => {
+    /* Here, do not perform any operations, just return a success message with its respective status (200),
+     because to log out when using JSON Web Token, it is only necessary to remove the token that is stored
+     on the client side, either in localStorage or cookies.*/
+    res.status(200).json({ message: "Logout successfully" });
+  };
+  
+  
+  
+  
+  
+  
+  
+  
 

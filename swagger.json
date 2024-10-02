@@ -1,0 +1,126 @@
+{
+    "openapi": "3.0.1",
+    "info": {
+      "title": "Simple-User-Authentication-API",
+      "description": "Documentation for the authentication API",
+      "version": "1.0.0"
+    },
+    "basePath": "/api/auth",
+    "components": {
+      "securitySchemes": {
+        "bearerAuth": {
+          "type": "http",
+          "scheme": "bearer",
+          "bearerFormat": "JWT"
+        }
+      }
+    },
+    "paths": {
+      "/api/auth/signup": {
+        "post": {
+          "description": "Route to sign up a new user",
+          "tags": ["Auth"],
+          "security": [],
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "username": {
+                      "type": "string"
+                    },
+                    "email": {
+                      "type": "string"
+                    },
+                    "password": {
+                      "type": "string"
+                    },
+                    "confirmPassword": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "username": "john_doe",
+                    "email": "john.doe@example.com",
+                    "password": "strongpassword",
+                    "confirmPassword": "strongpassword"
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": "user created"
+            },
+            "400": {
+              "description": "The email already exists, please enter a new one"
+            },
+            "500": {
+              "description": "Internal Server Error"
+            }
+          }
+        }
+      },
+      "/api/auth/login": {
+        "post": {
+          "description": "Route to log in a user",
+          "tags": ["Auth"],
+          "security": [],
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "email": {
+                      "type": "string"
+                    },
+                    "password": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "email": "john.doe@example.com",
+                    "password": "strongpassword"
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "authenticated user"
+            },
+            "400": {
+              "description": "invalid password"
+            },
+            "404": {
+              "description": "user not found"
+            },
+            "500": {
+              "description": "Internal Server Error"
+            }
+          }
+        }
+      },
+      "/api/auth/logout": {
+        "post": {
+          "description": "Route to log out a user",
+          "tags": ["Auth"],
+          "security": [
+            {
+              "bearerAuth": []
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Logout successfully"
+            }
+          }
+        }
+      }
+    }
+  }
+  
