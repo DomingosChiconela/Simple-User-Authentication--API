@@ -1,4 +1,6 @@
-import { Request,Response } from "express";
+import { Request,Response} from "express";
+
+
 import { date, z } from "zod";
 import { db } from "../utils/db.server";
 import { fromZodError } from "zod-validation-error"
@@ -57,8 +59,8 @@ export const signup = async (req: Request, res: Response) => {
 
        const  newUser =  await db.user.create({
         data:{
-            email:validation.data.email,
             username:validation.data.username,
+            email:validation.data.email,
             password: passwordHash,
         },
         
